@@ -14,10 +14,6 @@ import FormField from "./FormField";
 
 import { useRouter } from "next/navigation";
 
-const formSchema = z.object({
-  username: z.string().min(1).max(50),
-});
-
 const authFormSchema = (type: FormType) => {
   return z.object({
     name: type == "sign-up" ? z.string().min(3) : z.string().optional(),
@@ -40,6 +36,8 @@ const AuthForm = ({ type }: { type: FormType }) => {
   });
 
   function onSubmit(data: z.infer<typeof formSchema>) {
+    console.log("Form data:", data);
+
     try {
       if (type == "sign-up") {
         toast.success("Account created successfully! Please sign in.");
